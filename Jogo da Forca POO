@@ -1,0 +1,123 @@
+import random
+
+board = ['''
+
+>>>>>>>>>>Hangman<<<<<<<<<<
+
++---+
+|   |
+    |
+    |
+    |
+    |
+=========''', '''
+
++---+
+|   |
+O   |
+    |
+    |
+    |
+=========''', '''
+
++---+
+|   |
+O   |
+|   |
+    |
+    |
+=========''', '''
+
+ +---+
+ |   |
+ O   |
+/|   |
+     |
+     |
+=========''', '''
+
+ +---+
+ |   |
+ O   |
+/|\  |
+     |
+     |
+=========''', '''
+
+ +---+
+ |   |
+ O   |
+/|\  |
+/    |
+     |
+=========''', '''
+
+ +---+
+ |   |
+ O   |
+/|\  |
+/ \  |
+     |
+=========''']
+
+class Hangman():
+    def __init__(self,palavra):
+        self.palavra=palavra
+        self.letras_erradas = []
+        self.letras_corretas = []
+        self.palavra_tela=list('_'*len(self.palavra))
+
+    def verifica_letra(self,letra):
+        if len(letra)==1:
+            letra=letra.lower()
+            if letra in self.letras_erradas:
+                print("Você ja tentou essa letra, tente outra letra")
+            
+            elif letra in self.palavra:
+                self.letras_corretas.append(letra)
+            
+            else:
+                self.letras_erradas.append(letra)
+            for i in range(0,len(self.palavra)):
+                if letra == self.palavra[i]:
+                    self.palavra_tela[i]=letra
+        else:
+            print("**** "+letra +" é um caractere inválido, diginte novamente****")
+                
+    def tela(self):
+        print(board[len(jogo.letras_erradas)])
+        print(' '.join(self.palavra_tela))
+        print("Letras que não fazem parte da palavra:")
+        print(jogo.letras_erradas)
+
+
+
+        
+
+
+
+
+
+palavras=["casa","academia","aeroporto","banheiro","comida","porta","jaca","batata"]
+#palavras=["casa"]
+
+jogo=Hangman(random.choice(palavras))
+while True:
+    jogo.tela()
+    jogo.verifica_letra(input("Digite uma letra:"))
+    if len(jogo.letras_erradas)>=6:
+        jogo.tela()
+        print("Você perdeu! =(")
+        print("A palavra era "+ jogo.palavra)
+        break
+    elif "_" not in jogo.palavra_tela:
+        print("Parabens você ganhou!!!!")
+        print("A palavra é "+ jogo.palavra)
+        
+        break
+    
+
+
+
+    
+
